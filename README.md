@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Plataforma de Gerenciamento de Influenciadoras
 
-## Getting Started
+Sistema para gerenciamento de influenciadoras digitais, com funcionalidades de cadastro, busca e integração com Instagram.
 
-First, run the development server:
+## Tecnologias Utilizadas
 
+- Frontend:
+  - Next.js 14 (App Router)
+  - TypeScript
+  - Chakra UI
+  - Axios
+  - Zod (validação)
+
+- Backend:
+  - Node.js
+  - Express
+  - PostgreSQL
+  - TypeScript
+  - Docker
+
+## Funcionalidades
+
+- Cadastro de influenciadoras
+- Scraping automático de dados do Instagram
+- Visualização de métricas (seguidores)
+- Sistema de tags para categorização
+- Interface responsiva e moderna
+
+## Como Executar
+
+### Pré-requisitos
+
+- Node.js 18+
+- Docker e Docker Compose
+- PostgreSQL (ou usar via Docker)
+
+### Configuração
+
+1. Clone o repositório:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [URL_DO_SEU_REPOSITORIO]
+cd plataforma-influenciadoras
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências do frontend:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Instale as dependências do backend:
+```bash
+cd backend
+npm install
+cd ..
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Configure as variáveis de ambiente:
+- Crie um arquivo `.env` na raiz do projeto com:
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/influencers
+```
 
-## Learn More
+### Executando
 
-To learn more about Next.js, take a look at the following resources:
+1. Inicie os containers Docker:
+```bash
+docker-compose up -d
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Inicie o frontend em modo desenvolvimento:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Acesse http://localhost:3000 no navegador
 
-## Deploy on Vercel
+## Estrutura do Projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+plataforma-influenciadoras/
+├── backend/              # API Node.js
+│   ├── src/
+│   │   ├── db.ts        # Configuração do banco
+│   │   ├── index.ts     # Servidor Express
+│   │   └── scraper.ts   # Scraping do Instagram
+│   └── ...
+├── src/                 # Frontend Next.js
+│   ├── app/
+│   │   ├── cadastro/    # Página de cadastro
+│   │   └── ...
+│   └── ...
+└── ...
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Crie um Pull Request
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
