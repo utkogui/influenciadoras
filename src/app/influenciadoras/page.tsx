@@ -134,35 +134,66 @@ export default function InfluencersPage() {
 
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} w="full">
           {filteredAndSortedInfluencers.map((influencer) => (
-            <VStack
+            <Link
               key={influencer.id}
-              borderWidth="1px"
-              borderRadius="lg"
-              p={6}
-              spacing={4}
-              align="center"
-              textAlign="center"
+              href={`https://instagram.com/${influencer.instagram.substring(1)}`}
+              isExternal
+              _hover={{ textDecoration: 'none' }}
+              w="full"
             >
-              <Avatar size="2xl" name={influencer.full_name} src={influencer.profile_pic_url || undefined} />
-              <VStack spacing={1}>
-                <Heading as="h3" size="md">
-                  {influencer.full_name}
-                </Heading>
-                <Link href={`https://instagram.com/${influencer.instagram.substring(1)}`} isExternal color="purple.500">
-                  {influencer.instagram}
-                </Link>
-                <Text fontSize="sm" color="gray.500">
-                  {influencer.followers ? `${(influencer.followers / 1000000).toFixed(1)}M seguidores` : 'N/A'}
-                </Text>
-              </VStack>
-              <HStack spacing={2} wrap="wrap" justify="center">
-                {influencer.profile_tags && influencer.profile_tags.map((tag) => (
-                  <Tag key={tag} size="sm" colorScheme="purple">
-                    {tag}
-                  </Tag>
-                ))}
-              </HStack>
-            </VStack>
+              <Box
+                borderWidth="1px"
+                borderRadius="lg"
+                p={6}
+                transition="all 0.2s"
+                _hover={{
+                  transform: 'translateY(-4px)',
+                  shadow: 'lg',
+                  borderColor: 'purple.200'
+                }}
+              >
+                <VStack spacing={4} align="center" textAlign="center">
+                  <Avatar 
+                    size="2xl" 
+                    name={influencer.full_name} 
+                    src={influencer.profile_pic_url || undefined}
+                    referrerPolicy="no-referrer"
+                    crossOrigin="anonymous"
+                  />
+                  <VStack spacing={1}>
+                    <Heading as="h3" size="md">
+                      {influencer.full_name}
+                    </Heading>
+                    <Text color="purple.500">
+                      {influencer.instagram}
+                    </Text>
+                    <Text fontSize="sm" color="gray.500">
+                      {influencer.followers ? `${(influencer.followers / 1000000).toFixed(1)}M seguidores` : 'N/A'}
+                    </Text>
+                  </VStack>
+                  
+                  {influencer.bio && (
+                    <Text 
+                      fontSize="sm" 
+                      color="gray.600"
+                      noOfLines={3}
+                      h="4.5em"
+                      overflow="hidden"
+                    >
+                      {influencer.bio}
+                    </Text>
+                  )}
+
+                  <HStack spacing={2} wrap="wrap" justify="center">
+                    {influencer.profile_tags && influencer.profile_tags.map((tag) => (
+                      <Tag key={tag} size="sm" colorScheme="purple">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </HStack>
+                </VStack>
+              </Box>
+            </Link>
           ))}
         </SimpleGrid>
       </VStack>

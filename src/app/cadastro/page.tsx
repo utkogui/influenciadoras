@@ -206,55 +206,25 @@ export default function CadastroPage() {
         Cadastro de Influenciadora
       </Heading>
       <Box as="form" onSubmit={handleSubmit}>
-        <VStack spacing={4} align="stretch">
-          {formData.profilePicUrl && (
-            <FormControl>
-              <Box position="relative" width="fit-content" mx="auto">
-                <Avatar 
-                  size="2xl" 
-                  name={formData.fullName} 
-                  src={formData.profilePicUrl}
-                  referrerPolicy="no-referrer"
-                  crossOrigin="anonymous"
-                  icon={
-                    <Avatar
-                      size="2xl"
-                      name={formData.fullName}
-                      bg="purple.500"
-                    />
-                  }
-                />
-              </Box>
-            </FormControl>
-          )}
-
-          <FormControl isRequired isInvalid={!!errors.fullName}>
-            <FormLabel>Nome completo</FormLabel>
-            <Input
-              name="fullName"
-              placeholder="Ex: Ana Silva"
-              onChange={handleChange}
-              value={formData.fullName || ''}
-            />
-            {errors.fullName && <FormErrorMessage>{errors.fullName}</FormErrorMessage>}
-          </FormControl>
-
+        <VStack spacing={6} align="stretch">
           <FormControl isRequired isInvalid={!!errors.instagram}>
-            <FormLabel>@Instagram</FormLabel>
-            <InputGroup>
+            <FormLabel fontSize="lg" fontWeight="bold">@Instagram da Influenciadora</FormLabel>
+            <InputGroup size="lg">
               <Input
                 name="instagram"
                 placeholder="Ex: @ana.silva"
                 onChange={handleChange}
                 value={formData.instagram || ''}
+                fontSize="lg"
               />
-              <InputRightElement>
+              <InputRightElement width="4.5rem">
                 {isScraping ? (
                   <Spinner size="sm" />
                 ) : scrapeStatus && (
                   <Icon
                     as={scrapeStatus.success ? FiCheckCircle : FiAlertCircle}
                     color={scrapeStatus.success ? 'green.500' : 'red.500'}
+                    boxSize="1.5em"
                   />
                 )}
               </InputRightElement>
@@ -275,55 +245,123 @@ export default function CadastroPage() {
                     </Badge>
                   </Tooltip>
                 )}
-                {formData.followers && (
-                  <Badge colorScheme="purple" variant="subtle">
-                    {new Intl.NumberFormat('pt-BR').format(formData.followers)} seguidores
-                  </Badge>
-                )}
               </HStack>
             )}
           </FormControl>
 
-          <FormControl>
-            <FormLabel>Bio</FormLabel>
-            <Textarea
-              name="bio"
-              placeholder="Bio do Instagram (preenchido automaticamente)"
-              value={formData.bio || ''}
-              onChange={handleChange}
-              isDisabled
-            />
-          </FormControl>
+          {scrapeStatus?.success && (
+            <Box 
+              borderWidth="1px" 
+              borderRadius="lg" 
+              p={6} 
+              bg="gray.50"
+              position="relative"
+            >
+              <Text 
+                position="absolute" 
+                top="-12px" 
+                left="10px" 
+                bg="white" 
+                px={2}
+                color="gray.600"
+                fontSize="sm"
+              >
+                Dados obtidos do Instagram
+              </Text>
+              
+              <VStack spacing={6} align="stretch">
+                {formData.profilePicUrl && (
+                  <Box position="relative" width="fit-content" mx="auto">
+                    <Avatar 
+                      size="2xl" 
+                      name={formData.fullName} 
+                      src={formData.profilePicUrl}
+                      referrerPolicy="no-referrer"
+                      crossOrigin="anonymous"
+                      icon={
+                        <Avatar
+                          size="2xl"
+                          name={formData.fullName}
+                          bg="purple.500"
+                        />
+                      }
+                    />
+                  </Box>
+                )}
 
-          <FormControl mb={4}>
-            <FormLabel>Perfil de atuação (tags)</FormLabel>
+                <FormControl isRequired isInvalid={!!errors.fullName}>
+                  <FormLabel>Nome completo</FormLabel>
+                  <Input
+                    name="fullName"
+                    placeholder="Ex: Ana Silva"
+                    onChange={handleChange}
+                    value={formData.fullName || ''}
+                    bg="white"
+                  />
+                  {errors.fullName && <FormErrorMessage>{errors.fullName}</FormErrorMessage>}
+                </FormControl>
+
+                {formData.followers && (
+                  <FormControl>
+                    <FormLabel>Seguidores</FormLabel>
+                    <Input
+                      value={`${(formData.followers / 1000000).toFixed(1)}M`}
+                      isReadOnly
+                      bg="white"
+                    />
+                  </FormControl>
+                )}
+
+                {formData.bio && (
+                  <FormControl>
+                    <FormLabel>Bio</FormLabel>
+                    <Textarea
+                      name="bio"
+                      value={formData.bio || ''}
+                      isReadOnly
+                      bg="white"
+                      rows={3}
+                    />
+                  </FormControl>
+                )}
+              </VStack>
+            </Box>
+          )}
+
+          <FormControl>
+            <FormLabel>Tags do Perfil</FormLabel>
             <Input
               name="profile"
-              placeholder="Ex: cabelo, maquiagem, moda..."
+              placeholder="Ex: moda, lifestyle, beleza (separar por vírgula)"
               onChange={handleChange}
               value={formData.profile || ''}
             />
           </FormControl>
 
-          <FormControl mb={6}>
-            <FormLabel>Observações gerais</FormLabel>
+          <FormControl>
+            <FormLabel>Observações</FormLabel>
             <Textarea
               name="notes"
-              placeholder="Informações adicionais..."
+              placeholder="Adicione notas ou observações sobre a influenciadora"
               onChange={handleChange}
               value={formData.notes || ''}
+              rows={4}
             />
           </FormControl>
 
-          <Button
-            type="submit"
-            colorScheme="purple"
-            width="full"
-            size="lg"
-            isLoading={isLoading}
-          >
-            Salvar
-          </Button>
+          <HStack spacing={4} justify="flex-end">
+            <Button onClick={handleReset} variant="outline">
+              Limpar
+            </Button>
+            <Button
+              type="submit"
+              colorScheme="purple"
+              isLoading={isLoading}
+              loadingText="Cadastrando..."
+            >
+              Cadastrar
+            </Button>
+          </HStack>
         </VStack>
       </Box>
     </Container>
