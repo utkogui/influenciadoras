@@ -161,11 +161,16 @@ export default function CadastroPage() {
       // Preparar os dados para envio
       const dataToSend = {
         fullName: formData.fullName || '',
-        instagram: formData.instagram,
+        instagram: formData.instagram || '',
         followers: formData.followers || null,
         bio: formData.bio || null,
         profilePicUrl: formData.profilePicUrl || null,
-        profile: formData.profile ? formData.profile.split(',').map(tag => tag.trim()) : null,
+        profile:
+          formData.profile && typeof formData.profile === 'string'
+            ? formData.profile.split(',').map((tag: string) => tag.trim())
+            : Array.isArray(formData.profile)
+            ? formData.profile
+            : null,
         notes: formData.notes || null
       };
 
@@ -302,7 +307,7 @@ export default function CadastroPage() {
                     </Text>
                   </Box>
                   
-                  {formData.followers !== undefined && (
+                  {typeof formData.followers === 'number' && (
                     <Box>
                       <Text fontSize="sm" color="gray.500" fontWeight="medium">
                         Seguidores
