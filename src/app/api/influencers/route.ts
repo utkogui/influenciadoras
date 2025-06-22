@@ -26,6 +26,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  // Log para depuração -> Verifique os logs da Vercel para ver este output
+  console.log('Verificando DATABASE_URL:', process.env.DATABASE_URL);
+  
   try {
     const body = await request.json();
     const { fullName, instagram, followers, bio, profilePicUrl, profile, notes } = body;
