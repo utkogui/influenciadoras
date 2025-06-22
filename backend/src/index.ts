@@ -8,7 +8,6 @@ import axios from 'axios'
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -153,6 +152,5 @@ app.post('/scrape', async (req: Request, res: Response) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-}); 
+// Exporta o app para uso serverless
+export default app; 

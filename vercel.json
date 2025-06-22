@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/backend/src/:path*"
+    }
+  ],
+  "functions": {
+    "backend/src/**/*": {
+      "runtime": "@vercel/node@latest"
+    }
+  }
+} 
