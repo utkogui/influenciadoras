@@ -42,7 +42,7 @@ export default function InfluencersPage() {
   const tagBg = useColorModeValue('blue.50', 'blue.900')
 
   useEffect(() => {
-    fetch('http://localhost:3001/influencers')
+    fetch('/api/influencers')
       .then((res) => res.json())
       .then(setInfluencers)
       .catch(console.error)

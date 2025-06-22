@@ -107,7 +107,7 @@ export default function CadastroPage() {
       // Remove o @ antes de enviar para o backend
       const username = formData.instagram.replace(/^@+/, '')
       
-      const response = await axios.post('http://localhost:3001/scrape', {
+      const response = await axios.post('/api/scrape', {
         username
       })
 
@@ -175,7 +175,7 @@ export default function CadastroPage() {
       const validatedData = influencerSchema.parse(dataToSend);
       
       // Enviar para a API
-      const response = await axios.post('http://localhost:3001/influencers', validatedData);
+      const response = await axios.post('/api/influencers', validatedData);
       
       if (response.data) {
         toast({
