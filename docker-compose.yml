@@ -1,28 +1,42 @@
-services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgres://admin:docker@db:5432/influencers_db
-      - NODE_ENV=development
-    restart: unless-stopped
+version: '3.8'
 
-  db:
-    image: postgres:15-alpine
+services:
+  postgres:
+    image: postgres:latest
     environment:
-      - POSTGRES_DB=influencers_db
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=docker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: influenciadoras
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/influenciadoras
+      - NODE_ENV=development
+      - PORT=3001
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - backend
 
 volumes:
   postgres_data: 
