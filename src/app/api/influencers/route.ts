@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import pool from '../../../../backend/src/db';
-import cors from 'cors';
+import pool from '@/lib/db';
 
 // Configuração do CORS
 const corsHeaders = {

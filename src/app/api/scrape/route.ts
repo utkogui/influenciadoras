@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { scrapeInstagramProfile } from '../../../../backend/src/scraper';
+import { scrapeInstagramProfile } from '@/lib/scraper';
 
 // Configuração do CORS
 const corsHeaders = {
