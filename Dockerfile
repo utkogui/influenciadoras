@@ -18,14 +18,14 @@ WORKDIR /app
 # Copia os arquivos de dependência
 COPY package*.json ./
 
-# Instala as dependências
-RUN npm install
+# Instala as dependências (incluindo devDependencies para o build)
+RUN npm ci
 
 # Copia o restante do código
 COPY . .
 
 # Build do projeto (Next.js)
-RUN npx next build
+RUN npm run build
 
 # Expõe a porta padrão do Next.js
 EXPOSE 3000
