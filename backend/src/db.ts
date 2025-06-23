@@ -20,15 +20,15 @@ async function setupDatabase() {
     await pool.query(`
       CREATE TABLE influencers (
         id SERIAL PRIMARY KEY,
-        full_name VARCHAR(255) NOT NULL,
-        instagram VARCHAR(255) NOT NULL,
-        followers INTEGER,
+        full_name TEXT NOT NULL,
+        instagram TEXT NOT NULL UNIQUE,
+        followers INT,
         bio TEXT,
         profile_pic_url TEXT,
-        profile TEXT,
+        profile_tags TEXT[],
         notes TEXT,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        last_scrape_at TIMESTAMP WITH TIME ZONE
       );
     `);
 
