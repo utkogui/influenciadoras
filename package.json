@@ -13,9 +13,11 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
     "framer-motion": "^10.18.0",
     "next": "14.2.5",
+    "postcss": "^8.5.6",
     "puppeteer": "^24.10.2",
     "react": "^18",
     "react-dom": "^18",
@@ -24,13 +26,14 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "@flydotio/dockerfile": "^0.7.10",
+    "@tailwindcss/postcss": "^4.1.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.10",
     "typescript": "^5"
   }
 }
