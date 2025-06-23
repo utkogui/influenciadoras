@@ -165,7 +165,9 @@ export default function CadastroPage() {
         followers: formData.followers || null,
         bio: formData.bio || null,
         profilePicUrl: formData.profilePicUrl || null,
-        profile: formData.profile ? formData.profile.split(',').map(tag => tag.trim()) : null,
+        profile: formData.profile ? 
+          (Array.isArray(formData.profile) ? formData.profile : formData.profile.split(',').map(tag => tag.trim())) 
+          : null,
         notes: formData.notes || null
       };
 
@@ -302,16 +304,28 @@ export default function CadastroPage() {
                     </Text>
                   </Box>
                   
-                  {formData.followers !== undefined && (
-                    <Box>
-                      <Text fontSize="sm" color="gray.500" fontWeight="medium">
-                        Seguidores
-                      </Text>
-                      <Text fontSize="lg" fontWeight="bold">
-                        {formData.followers.toLocaleString('pt-BR')}
-                      </Text>
-                    </Box>
-                  )}
+                  {formData.followers !== null && formData.followers !== undefined
+                    ? (
+                      <Box>
+                        <Text fontSize="sm" color="gray.500" fontWeight="medium">
+                          Seguidores
+                        </Text>
+                        <Text fontSize="lg" fontWeight="bold">
+                          {formData.followers.toLocaleString('pt-BR')}
+                        </Text>
+                      </Box>
+                    )
+                    : (
+                      <Box>
+                        <Text fontSize="sm" color="gray.500" fontWeight="medium">
+                          Seguidores
+                        </Text>
+                        <Text fontSize="lg" fontWeight="bold">
+                          Não informado
+                        </Text>
+                      </Box>
+                    )
+                  }
 
                   {formData.bio && (
                     <Box>
