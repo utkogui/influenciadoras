@@ -24,7 +24,7 @@ export default function RootLayout({
           <Box as="header" bg="purple.600" color="white" py={4} px={8}>
             <Flex justify="space-between" align="center">
               <Heading as="h1" size="md">
-                <Link as={NextLink} href="/">
+                <Link as={NextLink} href="/influenciadoras">
                   Plataforma de Influenciadoras
                 </Link>
               </Heading>

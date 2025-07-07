@@ -1,13 +1,6 @@
-'use client'
-
-import { Heading } from '@chakra-ui/react'
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <main>
-      <Heading as="h1" size="xl" textAlign="center" my={10}>
-        Plataforma de Influenciadoras
-      </Heading>
-    </main>
-  )
-}
+  redirect('/influenciadoras');
+  return null;
+} 

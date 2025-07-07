@@ -28,13 +28,14 @@ Sistema para gerenciamento de influenciadoras digitais, com funcionalidades de c
 
 ## Como Executar
 
-### Pré-requisitos
+### Opção 1: Execução Local (Recomendado)
+
+#### Pré-requisitos
 
 - Node.js 18+
-- Docker e Docker Compose
-- PostgreSQL (ou usar via Docker)
+- PostgreSQL instalado localmente
 
-### Configuração
+#### Configuração
 
 1. Clone o repositório:
 ```bash
@@ -42,25 +43,41 @@ git clone [URL_DO_SEU_REPOSITORIO]
 cd plataforma-influenciadoras
 ```
 
-2. Instale as dependências do frontend:
+2. Instale as dependências:
 ```bash
 npm install
 ```
 
-3. Instale as dependências do backend:
-```bash
-cd backend
-npm install
-cd ..
-```
+3. Configure o PostgreSQL:
+   - Instale o PostgreSQL seguindo as instruções em `database-setup.md`
+   - Crie o banco de dados: `CREATE DATABASE influenciadoras;`
 
 4. Configure as variáveis de ambiente:
-- Crie um arquivo `.env` na raiz do projeto com:
+   - Crie um arquivo `.env.local` na raiz do projeto com:
 ```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/influencers
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/influenciadoras
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+NODE_ENV=development
+PORT=3000
 ```
 
-### Executando
+#### Executando
+
+1. Inicie o projeto em modo desenvolvimento:
+```bash
+npm run dev
+```
+
+2. Acesse http://localhost:3000 no navegador
+
+### Opção 2: Execução com Docker (Legado)
+
+#### Pré-requisitos
+
+- Node.js 18+
+- Docker e Docker Compose
+
+#### Executando
 
 1. Inicie os containers Docker:
 ```bash
