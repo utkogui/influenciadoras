@@ -26,70 +26,22 @@ Sistema para gerenciamento de influenciadoras digitais, com funcionalidades de c
 - Sistema de tags para categorização
 - Interface responsiva e moderna
 
-## Como Executar
+## Como Executar em Produção (Render + Supabase)
 
-### Opção 1: Execução Local (Recomendado)
+### Pré-requisitos
+- Conta no Render
+- Conta no Supabase
 
-#### Pré-requisitos
+### Configuração
+1. Configure a variável de ambiente `DATABASE_URL` no Render:
+   ```
+   postgresql://postgres:Matilha0108!@#@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+   ```
+2. Execute o script SQL do projeto no Supabase para criar a tabela.
+3. Faça o deploy normalmente.
 
-- Node.js 18+
-- PostgreSQL instalado localmente
-
-#### Configuração
-
-1. Clone o repositório:
-```bash
-git clone [URL_DO_SEU_REPOSITORIO]
-cd plataforma-influenciadoras
-```
-
-2. Instale as dependências:
-```bash
-npm install
-```
-
-3. Configure o PostgreSQL:
-   - Instale o PostgreSQL seguindo as instruções em `database-setup.md`
-   - Crie o banco de dados: `CREATE DATABASE influenciadoras;`
-
-4. Configure as variáveis de ambiente:
-   - Crie um arquivo `.env.local` na raiz do projeto com:
-```env
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/influenciadoras
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-NODE_ENV=development
-PORT=3000
-```
-
-#### Executando
-
-1. Inicie o projeto em modo desenvolvimento:
-```bash
-npm run dev
-```
-
-2. Acesse http://localhost:3000 no navegador
-
-### Opção 2: Execução com Docker (Legado)
-
-#### Pré-requisitos
-
-- Node.js 18+
-- Docker e Docker Compose
-
-#### Executando
-
-1. Inicie os containers Docker:
-```bash
-docker-compose up -d
-```
-
-2. Inicie o frontend em modo desenvolvimento:
-```bash
-npm run dev
-```
-
-3. Acesse http://localhost:3000 no navegador
+### Observação
+Não use mais localhost. Toda a conexão é feita via Supabase.
 
 ## Estrutura do Projeto
 
